@@ -1,0 +1,108 @@
+/* FORMATAÇÕES DIRERAS */
+
+body {
+	/* background-image: url(imagem/fundo.jpg); */
+	margin: 0px;
+	overflow: hidden;
+}
+
+
+/* CLASSES */
+
+/* Bootstrap menu*/
+
+a:link {
+	color: black;
+}
+
+.area_login {
+	width: 36rem;
+	max-width: 80vw;
+	max-height: 80vh;
+	background-color: #696969;
+	border-radius: 40px;
+	opacity: 80%;
+	height: 260px;
+	padding-bottom: 20px;
+}
+
+.formulario {	
+	height: 250px;
+	padding: 10px 40px 0px 40px;
+}
+
+.tbl2:hover{
+	background-color: #1E90FF;
+	color: #fff;
+}
+
+h4{
+	text-align: center;
+}
+
+.cor{
+	background-color: #dddddd;
+}
+
+.tbl{
+	text-align: center;
+	width: 90%;
+	margin: auto;
+	border: 1px solid;
+}
+
+
+
+.tbl{
+	text-align: center;
+	width: 90%;
+	margin: auto;
+	border: 1px solid;
+}
+
+/* Bootstrap navbar */
+
+@media only screen and (max-width: 600px) {
+	.fundo {
+		width: 100%;
+		height: 300px;
+	}
+
+	.area_login {
+		width: 100%;
+	}
+
+	.form-control {
+		width: 100%;
+	}
+
+
+
+
+}
+
+@media only screen and (max-width: 284px) {
+	.area_login {
+		height: 280px;	
+	}
+}
+
+@media only screen and (max-width: 197px) {
+	.area_login {
+		height: 305px;	
+	}
+}
+
+
+/* Tela de login */
+.container-login-main {
+	max-width: 100vw;
+	min-height: 100vh;
+	background-image: url(../imagem/fundo.jpg);
+	background-position: center center;
+	background-size: cover;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}

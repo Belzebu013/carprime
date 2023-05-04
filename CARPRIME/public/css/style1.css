@@ -1,0 +1,40 @@
+section{
+	background-color: #E4E9F7;
+}
+
+.box_dash{
+	border-radius: 10px;
+	background-color: #87CEFA;
+	padding: 10px;
+	margin-right: 20px;
+	text-align: center;
+	height: auto;
+	overflow: hidden;
+	color: black;
+}
+
+.box_dash ul{
+	list-style: none;
+}
+
+.box_img img{
+	width: 900px;
+	border-radius: 15px;
+	width: 800px;
+	height: 600px;
+	border-radius: 15px;
+}
+
+.box_img2 img{
+	width:950px;
+	height: 600px;
+	border-radius: 15px;
+}
+
+.tabela{
+	width: 300px;
+}
+
+.card_edit{
+	border-radius: 10px;
+}
