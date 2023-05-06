@@ -28,7 +28,7 @@
 		th, td {
 			padding: 8px;
 			border: 1px solid #ddd;
-			text-align: left;
+			text-align: center;
 		}
 
 		th {
@@ -74,9 +74,49 @@
 	<button id="print-button" onclick="window.print()">Imprimir</button>
 	<div id="logo"></div>
 	<h1>Relatório de Vendas</h1>
-
 	<h2>Total de Vendas Mensal</h2>
-	<p>Insira aqui o total de vendas mensal.</p>
+    @switch($mes)
+        @case(1)
+            <?php $nome_mes = 'Janeiro'; ?>
+            @break
+        @case(2)
+            <?php $nome_mes = 'Fevereiro'; ?>
+            @break
+        @case(3)
+            <?php $nome_mes = 'Março'; ?>
+            @break
+        @case(4)
+            <?php $nome_mes = 'Abril'; ?>
+            @break
+        @case(5)
+            <?php $nome_mes = 'Maio'; ?>
+            @break
+        @case(6)
+            <?php $nome_mes = 'Junho'; ?>
+            @break
+        @case(7)
+            <?php $nome_mes = 'Julho'; ?>
+            @break
+        @case(8)
+            <?php $nome_mes = 'Agosto'; ?>
+            @break
+        @case(9)
+            <?php $nome_mes = 'Setembro'; ?>
+            @break
+        @case(10)
+            <?php $nome_mes = 'Outubro'; ?>
+            @break
+        @case(11)
+            <?php $nome_mes = 'Novembro'; ?>
+            @break
+        @case(12)
+            <?php $nome_mes = 'Dezembro'; ?>
+            @break
+        @default
+            <?php $nome_mes = ''; ?>
+    @endswitch
+    <h4>Mês: {{$nome_mes}}</h4>
+	<p>{{'R$ '.number_format($venda_mes, 2, ',', '.')}}</p>
 
 	<h2>Marcas de Carros Mais Vendidas no Mês</h2>
 	<table>
@@ -87,18 +127,12 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td>Ford</td>
-				<td>15</td>
-			</tr>
-			<tr>
-				<td>Chevrolet</td>
-				<td>10</td>
-			</tr>
-			<tr>
-				<td>Volkswagen</td>
-				<td>8</td>
-			</tr>
+            @foreach ($marcas_mais_vendidas as $marca)
+                <tr>
+                    <td>{{$marca->marca}}</td>
+                    <td>{{$marca->total_vendas}}</td>
+                </tr>
+            @endforeach
 		</tbody>
 	</table>
 
@@ -111,18 +145,12 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td>João</td>
-				<td>20</td>
-			</tr>
-			<tr>
-				<td>Maria</td>
-				<td>15</td>
-			</tr>
-			<tr>
-				<td>Pedro</td>
-				<td>10</td>
-            </tr>
+			@foreach ($total_vendas as $venda)
+                <tr>
+                    <td>{{$venda->Funcionario}}</td>
+                    <td>{{$venda->total_vendas}}</td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 

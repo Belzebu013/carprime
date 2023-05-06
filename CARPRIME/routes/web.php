@@ -43,4 +43,5 @@ Route::get('/cadastro-cliente', [\App\Http\Controllers\clientesController::Class
 
 Route::get('/relatorio{mes}', [\App\Http\Controllers\indexController::Class,'BaixarRelatorio'])
 ->name('relatorio');
+
     

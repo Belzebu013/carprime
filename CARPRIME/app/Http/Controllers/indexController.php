@@ -80,6 +80,8 @@ class indexController extends Controller
         
         $mes = (int)$request->input('valor');
 
+        $user = Login::where('id_cad', (int) Session::get('login'))->first()->nome_cad;
+
         $venda_mes = (float)Index::whereBetween('dt_venda',['2022-'.$mes.'-01','2022-'.$mes.'-30'])
             ->sum('vl_venda');
 
@@ -122,7 +124,7 @@ class indexController extends Controller
             ->orderBy('mes_venda', 'asc')
             ->get();
 
-        
+        dd($mes);
         return view('index', [
             'venda_mes'=>$venda_mes,
             'venda_ano'=>$venda_ano,
@@ -131,6 +133,7 @@ class indexController extends Controller
             'total_vendas'=>$venda_funcionario,
             'cores'=>$cores,
             'competencia'=>$competencia,
+            'user'=>$user,
             'mes'=>$mes
         ]);
     }
@@ -166,12 +169,13 @@ class indexController extends Controller
             ->get();
 
         
-            return route('relatorio', [
+            return view('relatorio', [
             'venda_mes'=>$venda_mes,
             'venda_ano'=>$venda_ano,
             'marcas_mais_vendidas'=>$marcas_mais_vendidas,
             'total_vendas'=>$venda_funcionario,
-            'competencia'=>$competencia
+            'competencia'=>$competencia,
+            'mes'=>$mes
         ]);
     }
 }

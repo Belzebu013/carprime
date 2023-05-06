@@ -329,7 +329,11 @@
                         <!-- Page Heading -->
                         <div class="d-flex align-items-center justify-content-end mb-4">
                             <h1 class="h3 mb-0 text-gray-800" id="dash"></h1>
-                            <a href="../arquivos/vendas_relat.pdf" class="btn btn-primary shadow-sm" target="_blank">
+                            <?php if(!empty($mes)):?>
+                                <a href="{{route('relatorio', ['mes'=>(int)$mes->mes_venda])}}" class="btn btn-primary shadow-sm" target="_blank">
+                            <?php else:?>
+                                <a href="{{route('relatorio', ['mes'=>date('m')])}}" class="btn btn-primary shadow-sm" target="_blank">
+                            <?php endif;?>
                                 <i class="fas fa-download fa-sm text-white-50"></i> Relatório Mensal
                             </a>
                         </div>
