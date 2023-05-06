@@ -77,6 +77,10 @@
             border: none;
         }
 
+        th{
+            text-align: center;
+        }
+
         
     </style>
 </head>
@@ -85,7 +89,7 @@
         <header>
             <div class="image-text">
                 <span class="image">
-                    <img src="imagens/cp.jpg" alt="">
+                    <img src="{{asset('arquivos/cp.jpg')}}" alt="">
                 </span>
 
                 <div class="text logo-text">
@@ -145,7 +149,7 @@
                     </a>
                 </li>
 
-                <li class="mode">
+                {{-- <li class="mode">
                     <div class="sun-moon">
                         <i class='bx bx-moon icon moon'></i>
                         <i class='bx bx-sun icon sun'></i>
@@ -155,7 +159,7 @@
                     <div class="toggle-switch">
                         <span class="switch"></span>
                     </div>
-                </li>
+                </li> --}}
                 
             </div>
         </div>
@@ -207,7 +211,7 @@
          <table class="table tbl">
           <thead  class="table-dark text-light" id="tb">
             <tr style="text-decoration: none;">
-              <th scope="col"><h4>Nome</h4></th>
+              <th scope="col" style="text-align: center;"><h4>Nome</h4></th>
               <th scope="col"><h4>CPF</th>
               <th scope="col"><h4>Email</th>
               <th scope="col"><h4>Endereço</th>
@@ -332,4 +336,23 @@
         })
     })
 </script>
+
+ <style>
+        .close{
+            opacity: 100%;
+            background-color:#000000				;
+        }
+
+        .close a{
+            color: #FFF;
+        }
+
+        .close .search-box{
+            display: none;
+        }
+
+        .close:not(:disabled):not(.disabled):hover, .close:not(:disabled):not(.disabled):focus {
+            opacity: 100%;
+        }
+    </style>
 </html>

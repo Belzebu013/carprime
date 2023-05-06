@@ -38,7 +38,7 @@
         <header>
             <div class="image-text">
                 <span class="image">
-                    <img src="imagens/cp.jpg" alt="">
+                    <img src="{{asset('arquivos/cp.jpg')}}" alt="">
                 </span>
 
                 <div class="text logo-text">
@@ -92,23 +92,13 @@
 
             <div class="bottom-content">
                 <li class="">
-                    <?php
-                    
-                        //realizar logout
-                        if(isset($_GET['logout'])){
-                            session_destroy();
-                            header('location:login.php');
-                    
-                        }
-
-                    ?>
-                    <a href="index.php?logout">
+                    <a href="{{route('logout')}}">
                         <i class='bx bx-log-out icon' ></i>
                         <span class="text nav-text">Logout</span>
                     </a>
                 </li>
 
-                <li class="mode">
+                {{-- <li class="mode">
                     <div class="sun-moon">
                         <i class='bx bx-moon icon moon'></i>
                         <i class='bx bx-sun icon sun'></i>
@@ -118,7 +108,7 @@
                     <div class="toggle-switch">
                         <span class="switch"></span>
                     </div>
-                </li>
+                </li> --}}
                 
             </div>
         </div>
@@ -251,9 +241,9 @@
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Nome</span>
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{$user}}</span>
                                     <img class="img-profile rounded-circle"
-                                        src="imagens/foto-user.svg" id="img_user">
+                                        src="{{asset('arquivos/foto-user.svg')}}" id="img_user">
                                 </a>
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -287,7 +277,6 @@
     
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
-
                        <div class="input-group mb-3" style="width: 12%;">
                         <select class="custom-select" id="inputGroupSelect01">
                         @foreach ($competencia as $mes)
@@ -334,6 +323,7 @@
                             <option value="{{$mes->mes_venda}}">{{$nome_mes}}</option>
                         @endforeach
                         </select>
+                        <button type="button" class="btn" style="width: 50px;" id="refresh"><i class="bi bi-arrow-clockwise"></i></button>
                         </div>
     
                         <!-- Page Heading -->
@@ -550,6 +540,9 @@
                                 <!-- Color System -->
                                 <!-- Numero de vendas por vendedor -->
                                
+                                
+                            </div>
+                            <div class="col-lg-6 mb-4">
                                 <div class="row">
                                     @foreach ($total_vendas as $key=>$venda)
                                     <div class="col-lg-6 mb-4">
@@ -564,36 +557,6 @@
                                     </div>
                                     @endforeach
                                 </div>
-                            </div>
-    
-                            <div class="col-lg-6 mb-4">
-    
-                                <!-- Ilustrações -->
-                                <div class="card shadow mb-4">
-                                    <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Ilustrações</h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="text-center">
-                                            <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                                                src="imagens/imagem-computador.svg" alt="...">
-                                        </div>
-                                        <p>Bem Vindo a CarPrime, site de desenvolvimento para sua concessionária</p>
-                    
-                                    </div>
-                                </div>
-    
-                                <!-- Approach -->
-                                <div class="card shadow mb-4">
-                                    <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Desenvolvimento</h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <p>A esquerda podemos visualizar as vendas de todos nossos vendedores.</p>
-                                        
-                                    </div>
-                                </div>
-    
                             </div>
                         </div>
     
@@ -662,6 +625,29 @@
 
         })
 
+        $('#refresh').click(()=>{
+            window.location.reload();
+        })
+
     </script>
+
+    <style>
+        .close{
+            opacity: 100%;
+            background-color:#000000				;
+        }
+
+        .close a{
+            color: #FFF;
+        }
+
+        .close .search-box{
+            display: none;
+        }
+
+        .close:not(:disabled):not(.disabled):hover, .close:not(:disabled):not(.disabled):focus {
+            opacity: 100%;
+        }
+    </style>
 
 </html>

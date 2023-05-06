@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Veiculos;
+use Illuminate\Support\Facades\Session;
 
 class veiculosController extends Controller
 {

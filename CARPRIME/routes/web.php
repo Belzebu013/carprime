@@ -13,9 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('index');
-// })->name('home');
+Route::get('/login', [\App\Http\Controllers\loginController::Class,'Login'])
+    ->name('login');
+
+Route::post('/login', [\App\Http\Controllers\loginController::Class,'Logar'])
+    ->name('logar');
+
+Route::get('/logout', [\App\Http\Controllers\loginController::Class,'Logout'])
+    ->name('logout');
 
 Route::get('/clientes', [\App\Http\Controllers\clientesController::Class,'listar'])
     ->name('clientes');
@@ -23,10 +28,6 @@ Route::get('/clientes', [\App\Http\Controllers\clientesController::Class,'listar
 Route::get('/financiamento', function () {
     return view('financiamento');
 })->name('financiamento');
-
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
 
 Route::get('/veiculos', [\App\Http\Controllers\veiculosController::Class,'Listar'])
     ->name('veiculos');
@@ -39,4 +40,7 @@ Route::get('/mudarCompetencia', [\App\Http\Controllers\indexController::Class,'m
 
 Route::get('/cadastro-cliente', [\App\Http\Controllers\clientesController::Class,'Cadastro'])
 ->name('cadastro');
+
+Route::get('/relatorio{mes}', [\App\Http\Controllers\indexController::Class,'BaixarRelatorio'])
+->name('relatorio');
     

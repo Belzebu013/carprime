@@ -23,27 +23,29 @@
 <body>
 	<div class="container-login-main tamanho">
 		<div class="area_login">
-			<form class="formulario" action="login.php" method="post">
+			<form class="formulario" method="post" action="{{route('logar')}}">
+			@csrf
 				<div class="mb-3">
 					<b><label  class="form-label" style="opacity: 100%; color: black;" id="user">Email</label></b>
-					<input type="text" class="form-control"
-						placeholder="@email.com" autofocus name="user">
+					<input type="text" class="form-control" placeholder="@email.com" autofocus name="user">
+					{{$errors->has('user') ? $errors->first('user') : ''}}
 				</div>
 				<div class="mb-3">
 					<b><label class="form-label" style="opacity: 100%; color: black;" id="senha">Senha</label></b>
 					<input type="password" class="form-control" name="senha">
+					{{$errors->has('senha') ? $errors->first('senha') : ''}}
 				</div>
 				<button type="submit" class="btn btn-primary" id="btn" name="logar">Entrar</button>
-			
 			</form>
-		
+			<h4 class="invalid_user">{{$msg ?? ''}}</h4> 
 		</div>
 	</div>
+	
 
 </body>
 <script>
 	$(document).ready(()=>{
-		$('.area_login').css({'width':'400px', 'position':'fixed','top':'calc(50%-200px)','left':'calc(50%-(height/2))'});
+		$('.area_login').css({'width':'400px', 'height':'280px','position':'fixed','top':'calc(50%-200px)','left':'calc(50%-(height/2))'});
 
 	});
 </script>
