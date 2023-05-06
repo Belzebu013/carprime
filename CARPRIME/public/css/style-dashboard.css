@@ -5570,7 +5570,7 @@
     line-height: 1;
     color: #000;
     text-shadow: 0 1px 0 #fff;
-    opacity: .5;
+    opacity: 100%;
   }
   
   .close:hover {

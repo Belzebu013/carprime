@@ -28,9 +28,15 @@ Route::get('/login', function () {
     return view('login');
 })->name('login');
 
-Route::get('/veiculos', function () {
-    return view('veiculos');
-})->name('veiculos');
+Route::get('/veiculos', [\App\Http\Controllers\veiculosController::Class,'Listar'])
+    ->name('veiculos');
 
 Route::get('/', [\App\Http\Controllers\indexController::Class,'index'])
     ->name('home');
+
+Route::get('/mudarCompetencia', [\App\Http\Controllers\indexController::Class,'mudarCompetencia'])
+    ->name('competencia');
+
+Route::get('/cadastro-cliente', [\App\Http\Controllers\clientesController::Class,'Cadastro'])
+->name('cadastro');
+    

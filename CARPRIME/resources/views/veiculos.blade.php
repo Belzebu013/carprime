@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!----======== CSS ======== -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
     
     <!----===== Boxicons CSS ===== -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
@@ -101,23 +101,23 @@
         <div class="container">
             <div class="row">
                 <!-- Card 1-->
-             
+            @foreach ($veiculos as $key=>$veiculo)
                 <div class="col">
-                    <div class="card" style="width: 15em; border-radius: 10px;">
-                        <img src="" class="card-img-top" alt="Honda Civic">
+                    <div class="card" style="width: 15em; border-radius: 10px;margin-top: 5%;">
+                        <img src="{{$veiculo->url_veiculo}}" class="card-img-top" alt="Imagem Carro">
                         <div class="card-body">
-                          <h5 class="card-title"></h5>
+                          <h5 class="card-title">{{$veiculo->nm_veiculo}}</h5>
                           <p class="card-text">
-                         
+                            {{$veiculo->ds_veiculo}}
                           </p>
                           <a href="#" class="btn btn-primary">Acessar</a>
                         </div>
                       </div>
                       <br/>
                 </div>  
-            
+            @endforeach
     </section>
-    <script src="js/script.js"></script>
+   <script src="{{ asset('js/script.js')}}"></script>
 
 </body>
 </html>

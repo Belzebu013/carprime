@@ -53,8 +53,9 @@ body.dark{
     width: 250px;
     padding: 10px 14px;
     background: var(--sidebar-color);
+    /* background-color: #4e4e4e	; */
     transition: var(--tran-05);
-    z-index: 100;  
+    z-index: 9999;  
 }
 .sidebar.close{
     width: 78px;
@@ -87,7 +88,7 @@ body.dark{
 
 .sidebar .text,
 .sidebar .icon{
-    color: var(--text-color);
+    color: #000;
     transition: var(--tran-03);
 }
 
@@ -199,12 +200,14 @@ body.dark .sidebar header .toggle{
     transition: var(--tran-03);
 }
 
-.sidebar li a:hover{
+/* .sidebar li a:hover{
     background-color: var(--primary-color);
-}
+} */
 .sidebar li a:hover .icon,
 .sidebar li a:hover .text{
-    color: var(--sidebar-color);
+    /* color: var(--sidebar-color); */
+    color: blue;
+    font-weight: bold;
 }
 body.dark .sidebar li a:hover .icon,
 body.dark .sidebar li a:hover .text{

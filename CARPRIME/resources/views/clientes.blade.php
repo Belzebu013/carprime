@@ -13,6 +13,10 @@
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('css/style_clientes.css')}}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <title>CarPrime</title> 
     <style>
@@ -59,6 +63,19 @@
             height: 150px;
         }
 
+        .botao_acao, .botao_acoes{
+            width: 120px;
+        }
+
+        .modal-cad{
+            width: 30%; 
+            height: 550px; 
+            border: 3px solid black; 
+            background-color: #DCDCDC; 
+            border-radius: 10px; 
+            padding: 0px 30px 0px 30px;
+            border: none;
+        }
 
         
     </style>
@@ -147,62 +164,84 @@
     
     <section class="home">
     <div id="conteudo">
-    <form id="wrap" style="text-decoration: none; border: none" action="clientes.php" method="post">
-
-        <input type="text" placeholder="Nome:" style="height: 32px" name="nome" class="form-control" aria-label="Username" aria-describedby="basic-addon1">&nbsp;&nbsp;
-        <input type="text" placeholder="CPF" style="height: 32px" name="cpf" class="form-control" aria-label="Username" aria-describedby="basic-addon1">&nbsp;&nbsp;
-        <input type="text" placeholder="email" style="height: 32px" name="email" class="form-control" aria-label="Username" aria-describedby="basic-addon1"><br><br>
-        <input type="text" placeholder="Endereço" style="height: 32px" name="endereco" class="form-control" aria-label="Username" aria-describedby="basic-addon1">&nbsp;&nbsp;
-        <input type="date" placeholder="Data de Nascimento" style="height: 32px" name="dt_nasc" class="form-control" aria-label="Username" aria-describedby="basic-addon1">&nbsp;&nbsp;
-        <input type="text" placeholder="Telefone" style="height: 32px" name="telefone" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-        <br/><br/>
-        <button type="submit" class="btn btn-outline-primary bt1" name="valida">Enviar</button>
-</form>
+    
+    <div class="modal fade" id="modal_cadastro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h4 class="modal-title" id="myModalLabel">CADASTRO</h4>
+            </div>
+            <div class="modal-body" style="background-color: #DCDCDC;">
+                <div class="mb-3">
+                    <label class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="nome" name="nome">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">CPF</label>
+                    <input type="text" class="form-control" id="cpf" name="cpf">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="email@host.com" name="email">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Endereço</label>
+                    <input type="text" class="form-control" id="endereco" name="endereco">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Data de Nascimento</label>
+                    <input type="date" class="form-control" id="dt_nascimento" name="dt_nasc">
+                </div>
+                <div class="mb-3">
+                <label class="form-label">Telefone</label>
+                    <input type="text" class="form-control" id="telefone" placeholder="999999999" name="telefone">
+                </div>
+                    <input type="submit" class="form-control text-light" id="cadastrar" name="cadastrar" value="Cadastrar">
+            </div>
+            </div>
+        </div>
+    </div>
 
     <div id="saida" style="text-decoration: none; border: none">
        
          <table class="table tbl">
           <thead  class="table-dark text-light" id="tb">
             <tr style="text-decoration: none;">
-              <th scope="col" ><h4>Nome</h4></th>
-              <th scope="col" ><h4>CPF</th>
-              <th scope="col" ><h4>Email</th>
-              <th scope="col" ><h4>Endereço</th>
-              <th scope="col" ><h4>Data de Nascimento</th>
-              <th scope="col" ><h4>Telefone</th>
-               <th scope="col" ></th>
-               <th scope="col" ></th>
+              <th scope="col"><h4>Nome</h4></th>
+              <th scope="col"><h4>CPF</th>
+              <th scope="col"><h4>Email</th>
+              <th scope="col"><h4>Endereço</th>
+              <th scope="col"><h4>Data de Nascimento</th>
+              <th scope="col"><h4>Telefone</th>
+               <th scope="col"></th>
+               <th scope="col"></th>
             </tr>
           </thead>
-
-
-            <hr/>
+        
+        <div style="text-align: center;">
+          <h4 id="titulo" style="font-size: 20px;"><i class="bi bi-person-lines-fill"></i> LISTAGEM DE CLIENTES ATIVOS<h4>
+          <div style="" id="botoes_alteracao">
+                <button type="button" class="btn btn-primary botao_acao"><i class="bi bi-caret-down-fill" id="icone_botao"></i></button>
+                <button type="button" class="btn btn-success botao_acoes" id="botao_cadastrar" data-toggle="modal" data-target="#modal_cadastro">Cadastrar</button>
+                <button type="button" class="btn" style="width: 50px;" id="refresh"><i class="bi bi-arrow-clockwise"></i></button>
+            </div>
+        </div>
+            
             <tbody>
             @foreach($clientes as $cliente)
-                <tr class='tbl2' class='cor' style='top: 50px'>";
-                <td>{{$cliente['nm_cliente']}}</td>;
-                <td>{{$cliente['cpf_cliente']}}</td>;
-                <td>{{$cliente['email_cliente']}}</td>;
-                <td>{{$cliente['ds_endereco']}}</td>;
-            
-                <td>$DataNasc->format('d/m/Y')</td>;
-                <td>{{$cliente['nm_telefone']}}</td>;
+                <tr class='tbl2' class='cor' style='top: 50px'>
+                <td>{{$cliente['nm_cliente']}}</td>
+                <td>{{$cliente['cpf_cliente']}}</td>
+                <td>{{$cliente['email_cliente']}}</td>
+                <td>{{$cliente['ds_endereco']}}</td>
+                <?php $dt_nasc = date("d/m/Y", strtotime($cliente->dt_nascimento));?>
+                <td>{{$dt_nasc}}</td>
+                <td>{{'(41) '.$cliente['nm_telefone']}}</td>
                 <tr>
         
             @endforeach
             </tbody>
            
-
-    <form action="clientes.php" method="POST">  
-        <Input type="hidden" class="inp" name="id" value=""/>
-        <Input type="text" class="inp" name="nome" value=""/>
-        <Input type="text"  class="inp" name="cpf" value=">"/>
-        <Input type="text"  class="inp" name="email" value=""/>
-        <Input type="text"  class="inp" name="endereco" value=""/>
-        <Input type="text"  class="inp" name="dt_nasc" value=""/>
-        <Input type="text"  class="inp" name="telefone" value=""/>
-        <Input type="submit" name="altera" value="Alterar" class="bt1" id="btn1"/>
-    </form>
    
     </br>
     </br>
@@ -216,6 +255,7 @@
 </body>
 <script>
     $(document).ready(()=>{
+
         $('.inp').css({'width':'150px','height':'30px','padding':'5px','margin-left':'20px','border-radius':'5px','border':'transparent'});
 
         $('#btn1').css({'width':'100px','height':'30px','margin-left':'20px','border-radius':'5px','text-align':'center'});
@@ -230,8 +270,66 @@
             $('#btn1').css({'color':'black'});
         })
         
+        $('input.form-control').css({'border-raius':'5px'});
 
+        $('#cadastrar').addClass('bg-primary');
 
+        $('#cadastrar').css({'margin-top':'20px', 'width':'45%'});
+
+        $('.botao_acoes').hide();
+
+        let contador = 0;
+        $('.botao_acao').click(()=>{
+            contador++;
+            $('.botao_acoes').toggle();
+            const $iElement = $('#icone_botao');
+            if((contador % 2) != 0){
+                $iElement.removeClass('bi-caret-down-fill');
+                $iElement.addClass('bi-caret-right');
+            }else{
+                $iElement.removeClass('bi-caret-right');
+                $iElement.addClass('bi-caret-down-fill');
+            }
+        })
     });
+
+    $('#refresh').click(()=>{
+        window.location.reload();
+    })
+
+    $('#botao_cadastrar').click(() => {
+        $('#modal_cadastro').toggle('display');
+    });
+
+    $('#cadastrar').on('click', ()=>{
+        var nome = $('#nome').val();
+        var cpf = $('#cpf').val();
+        var email = $('#email').val();
+        var endereco = $('#endereco').val();
+        var dt_nascimento = $('#dt_nascimento').val();
+        var telefone = $('#telefone').val();
+        
+        $.ajax({
+            url: '/cadastro-cliente',
+            method: 'get',
+            data: {
+                nome: nome, 
+                cpf: cpf, 
+                email: email, 
+                endereco: endereco,
+                dt_nascimento: dt_nascimento,
+                telefone: telefone
+            },
+            success: function(data){
+                $('#modal_cadastro').click()
+                $('#titulo').css('font-size', '30px');
+                $('#titulo').html(data)
+                setTimeout(function(){
+                    window.location.reload();
+                },4000)
+            }
+            
+        })
+    })
 </script>
 </html>

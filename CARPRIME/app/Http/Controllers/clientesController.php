@@ -12,4 +12,21 @@ class clientesController extends Controller
         
         return view('clientes', ['clientes'=>$clientes]);
     }
+
+    public function Cadastro(){
+        $dados = $_REQUEST;
+
+        $cliente = new Clientes();
+        $cliente->nm_cliente = $dados['nome'];
+        $cliente->cpf_cliente = $dados['cpf'];
+        $cliente->email_cliente = $dados['email'];
+        $cliente->ds_endereco = $dados['endereco'];
+        $cliente->dt_nascimento = $dados['dt_nascimento'];
+        $cliente->nm_telefone = $dados['telefone'];
+        $cliente->save();
+
+        return 'Cadastro realizado com sucesso!';
+
+    }
+
 }
