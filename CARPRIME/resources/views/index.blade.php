@@ -82,7 +82,7 @@
 
                     <li class="nav-link">
                         <a href="{{route('financiamento')}}">
-                            <i class='bi bi-person-plus ' ></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <i class="bi bi-cash-coin"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <span class="text nav-text">Financiamento</span>
                         </a>
                     </li>         
@@ -179,7 +179,7 @@
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-bell fa-fw"></i>
                                     <!-- Counter - Alerts -->
-                                    <span class="badge badge-danger badge-counter">3+</span>
+                                    <span class="badge badge-danger badge-counter">0</span>
                                 </a>
                                 <!-- Dropdown - Alerts -->
                                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -230,7 +230,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
                                 <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">7</span>
+                                <span class="badge badge-danger badge-counter">0</span>
                             </a>
                            
                         </li>                   
@@ -329,11 +329,7 @@
                         <!-- Page Heading -->
                         <div class="d-flex align-items-center justify-content-end mb-4">
                             <h1 class="h3 mb-0 text-gray-800" id="dash"></h1>
-                            <?php if(!empty($mes)):?>
-                                <a href="{{route('relatorio', ['mes'=>(int)$mes->mes_venda])}}" class="btn btn-primary shadow-sm" target="_blank">
-                            <?php else:?>
-                                <a href="{{route('relatorio', ['mes'=>date('m')])}}" class="btn btn-primary shadow-sm" target="_blank">
-                            <?php endif;?>
+                                <a href="#" class="btn btn-primary shadow-sm" target="_blank" id="relatorio">
                                 <i class="fas fa-download fa-sm text-white-50"></i> Relatório Mensal
                             </a>
                         </div>
@@ -574,7 +570,7 @@
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
-                            <span>Opet &copy; Felipe Taverna e Eduardo Daniel 2022</span>
+                            <span>Opet &copy; 2023</span>
                         </div>
                     </div>
                 </footer>
@@ -621,6 +617,7 @@
                     url: '/mudarCompetencia',
                     data: { valor: valor },
                     success: function(data) {
+                        console.log(data)
                         $('body').html(data);
                         $('#inputGroupSelect01 option[value="' + valor + '"]').prop('selected', true);
                     }
@@ -632,6 +629,22 @@
         $('#refresh').click(()=>{
             window.location.reload();
         })
+
+        $('#relatorio').on('click', function(e){
+            e.preventDefault();
+            let valor = $('#inputGroupSelect01').val();
+            $.ajax({
+                type: 'GET',
+                url: '/relatorio',
+                data: { valor: valor },
+                success: function(data) {
+                    var novaAba = window.open();
+                    novaAba.document.write(data);
+                    novaAba.document.close();
+                }
+            });
+
+        });
 
     </script>
 

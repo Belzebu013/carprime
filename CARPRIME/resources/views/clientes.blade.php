@@ -133,7 +133,7 @@
 
                     <li class="nav-link">
                         <a href="{{route('financiamento')}}">
-                            <i class='bi bi-person-plus ' ></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <i class="bi bi-cash-coin"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <span class="text nav-text">Financiamento</span>
                         </a>
                     </li>         
@@ -169,6 +169,7 @@
     <section class="home">
     <div id="conteudo">
     
+    {{-- Modal de cadastro de cliente --}}
     <div class="modal fade" id="modal_cadastro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -176,6 +177,7 @@
                 <h4 class="modal-title" id="myModalLabel">CADASTRO</h4>
             </div>
             <div class="modal-body" style="background-color: #DCDCDC;">
+                <input type="hidden" name="id_cliente" id="id_cliente">
                 <div class="mb-3">
                     <label class="form-label">Nome</label>
                     <input type="text" class="form-control" id="nome" name="nome">
@@ -206,6 +208,31 @@
         </div>
     </div>
 
+    {{-- Modal de confirmação de exclusao de cliente --}}
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Exclusão</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Tem certeza que deseja excluir o cliente?
+            </div>
+            <div class="modal-footer">
+                 <form method="get" action="{{ route('excluir-cliente') }}">
+                    @csrf
+                    <input type="hidden" name="id_cliente" id="clienteId">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="width: 100px;">Cancelar</button>
+                    <button type="submit" class="btn btn-danger" style="width: 100px;">Excluir</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
     <div id="saida" style="text-decoration: none; border: none">
        
          <table class="table tbl">
@@ -223,7 +250,7 @@
           </thead>
         
         <div style="text-align: center;">
-          <h4 id="titulo" style="font-size: 20px;"><i class="bi bi-person-lines-fill"></i> LISTAGEM DE CLIENTES ATIVOS<h4>
+          <h4 id="titulo" style="font-size: 20px;"><i class="bi bi-person-lines-fill"></i> {{!isset($msg) ? 'LISTAGEM DE CLIENTES ATIVOS': $msg;}}<h4>
           <div style="" id="botoes_alteracao">
                 <button type="button" class="btn btn-primary botao_acao"><i class="bi bi-caret-down-fill" id="icone_botao"></i></button>
                 <button type="button" class="btn btn-success botao_acoes" id="botao_cadastrar" data-toggle="modal" data-target="#modal_cadastro">Cadastrar</button>
@@ -241,11 +268,12 @@
                 <?php $dt_nasc = date("d/m/Y", strtotime($cliente->dt_nascimento));?>
                 <td>{{$dt_nasc}}</td>
                 <td>{{'(41) '.$cliente['nm_telefone']}}</td>
+                <td><a href="#" class="editar-cliente" data-id="{{$cliente->id_cliente}}" data-toggle="modal" data-target="#modal_cadastro">Editar</a></td>
+                <td><a href="#" data-id="{{$cliente->id_cliente}}" class="excluir-cliente" data-toggle="modal" data-target="#confirmDeleteModal">Excluir</a></td>
                 <tr>
         
             @endforeach
             </tbody>
-           
    
     </br>
     </br>
@@ -258,7 +286,26 @@
 
 </body>
 <script>
+
+    $('.excluir-cliente').on('click', function () {
+        var id_cliente = $(this).data('id');
+        $('#clienteId').val(id_cliente);
+    });
+
+    $(document).on('click', '.editar-cliente', function() {
+        var id_cliente = $(this).data('id');
+        $('#id_cliente').val(id_cliente);
+    });
+
+
     $(document).ready(()=>{
+
+        $('#confirmDeleteModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            var clienteId = button.data('cliente-id');
+            var modal = $(this);
+            modal.find('#cliente_id').val(clienteId);
+        });
 
         $('.inp').css({'width':'150px','height':'30px','padding':'5px','margin-left':'20px','border-radius':'5px','border':'transparent'});
 
@@ -334,6 +381,7 @@
             }
             
         })
+
     })
 </script>
 

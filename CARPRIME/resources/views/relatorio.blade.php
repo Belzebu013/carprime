@@ -73,7 +73,7 @@
 <body>
 	<button id="print-button" onclick="window.print()">Imprimir</button>
 	<div id="logo"></div>
-	<h1>Relatório de Vendas</h1>
+	<h2>Relatório de Vendas</h2>
 	<h2>Total de Vendas Mensal</h2>
     @switch($mes)
         @case(1)

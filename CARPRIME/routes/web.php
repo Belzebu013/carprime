@@ -39,9 +39,21 @@ Route::get('/mudarCompetencia', [\App\Http\Controllers\indexController::Class,'m
     ->name('competencia');
 
 Route::get('/cadastro-cliente', [\App\Http\Controllers\clientesController::Class,'Cadastro'])
-->name('cadastro');
+    ->name('cadastro');
 
-Route::get('/relatorio{mes}', [\App\Http\Controllers\indexController::Class,'BaixarRelatorio'])
-->name('relatorio');
+Route::get('/clientes/excluir', [\App\Http\Controllers\clientesController::Class,'Excluir'])
+    ->name('excluir-cliente');
+
+Route::get('/relatorio', [\App\Http\Controllers\indexController::Class,'BaixarRelatorio'])
+    ->name('relatorio');
+
+Route::get('/financiamento', [\App\Http\Controllers\financiamentoController::Class,'Exibir'])
+    ->name('financiamento');
+
+Route::get('/calcular', [\App\Http\Controllers\financiamentoController::Class,'Calcular'])
+    ->name('financiamento-calcular');
+
+Route::get('/cadastro-veiculo', [\App\Http\Controllers\indexController::Class,'CadastroVeiculo'])
+    ->name('cadastro-veiculo');
 
     

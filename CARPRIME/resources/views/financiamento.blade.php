@@ -86,7 +86,7 @@
 
                     <li class="nav-link">
                         <a href="{{route('financiamento')}}">
-                            <i class='bi bi-person-plus ' ></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <i class="bi bi-cash-coin"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <span class="text nav-text">Financiamento</span>
                         </a>
                     </li>         
@@ -101,18 +101,6 @@
                         <span class="text nav-text">Logout</span>
                     </a>
                 </li>
-
-                {{-- <li class="mode">
-                    <div class="sun-moon">
-                        <i class='bx bx-moon icon moon'></i>
-                        <i class='bx bx-sun icon sun'></i>
-                    </div>
-                    <span class="mode-text text">Dark mode</span>
-
-                    <div class="toggle-switch">
-                        <span class="switch"></span>
-                    </div>
-                </li> --}}
                 
             </div>
         </div>
@@ -120,29 +108,66 @@
     </nav>
 
    <section class="home">
-    <div class="container" id="cont">
-      <div class="row">
-      <form method="post" action="Financiamento.php">
-        <label for="">VALOR TOTAL DO VEICULO</label>
-        <center><input class="form-control border-dark" type="number" name="valor"></center>
-        <br/>
+        <div class="container" id="cont">
+            <div class="row">
+            <form method="get" action="{{route('financiamento-calcular')}}">
+                <label for="">VEICULO</label>
+                <center>
+                <select class="form-control border-dark" name="vl_compra" style="width: 250px;">
+                    @foreach ($veiculos as $veiculo)
+                        <option value="{{$veiculo->vl_compra}}">{{$veiculo->nm_veiculo.' - R$'.$veiculo->vl_compra}}</option>
+                    @endforeach
+                </select>
+                </center>
+                <br/>
+                <label for="">ENTRADA</label>
+                <center><input class="form-control border-dark" type="text" name="entrada"></center>
+                <br/>
+                <label for="">TAXA DE JUROS MÊS</label>
+                <center><input class="form-control border-dark" type="text" name="taxa"></center>
+                <br/>
+                <label for="">QUANTIDADE DE PARCELAS</label>
+                <center><input class="form-control border-dark" type="number" name="parcelas"></center>
+                <br/>
 
-        <label for="">TAXA DE JUROS MES</label>
-        <center><input class="form-control border-dark" type="text" name="taxa"></center>
-        <br/>
-        <label for="">QUANTIDADE DE PARCELAS</label>
-        <center><input class="form-control border-dark" type="number" name="parcelas"></center>
-        <br/>
+                <center><button class="btn btn-primary" type="submit" name="calcula" id="sub">Calcular</button></center>
+            </form>
 
-      <center><button class="btn btn-primary" type="submit" name="calcula" id="sub">Calcular</button></center>
-      </form>
-      </div>
-      </div>
+            <div style="width: 650px;height: 500px; overflow: auto;">
+                <?php if(!empty($parcelas)): ?>
+                <center>
+                    <table style="width: 500px;margin-top: 80px;">
+                        <thead>
+                            <tr>
+                                <th>Valor Veículo</th>
+                                <th>Valor Entrada</th>
+                                <th>Numero Parcelas</th>
+                                <th>% Juros</th>
+                                <th>Valor Parcela</th>
+                                <th>Valor final</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                    <td>R$ {{ $valor_veiculo }}</td>
+                                    <td>R$ {{ $entrada }}</td>
+                                    <td>{{ $parcelas }}</td>
+                                    <td>{{ $taxa*100 }}%/mês</td>
+                                    <td>R$ {{ $valor_parcela }}</td>
+                                    <td>R$ {{ $calculo_valor_final }}</td>
+                                </tr>
+                        </tbody>
+                    </table>
+                    <h4 style="margin-top: 150px;">Valor Final: R$ {{ number_format($calculo_valor_final, 2, ',', '.') }}</h4>
+                </center>
+                <?php endif; ?>
+            </div>
 
-
-
+            </div>
+        </div>
 
     </section>
+
 
 
     <script src="js/script.js"></script>
@@ -159,18 +184,21 @@
                 });
             })
 
-            $('label').css({ 'width':'300px', 'text-align':'center'});
+            $('label').css({ 'width':'480px', 'text-align':'center'});
 
-            $('input').css({ 'width':'200px'});
+            $('input').css({ 'width':'250px'});
 
-            $('form').css({ 'width':'300px'});
+            $('form').css({ 'width':'500px'});
 
             $('h4').css({'text-align':'center'});
 
+            $('td').css({'text-align':'center','padding':'6px'});
+
+            $('th').css({'text-align':'center', 'padding':'6px'});
+
             $('#cont').css({ 
-              
-              'margin-top':'calc(20% - 150px)', 'left':'calc(50% - 150px)', 'width':'300px', 'background-color':'#e0e0e0',
-              'border-radius':'10px','height':'350px', 'padding':'10px'
+              'margin-top':'calc(20% - 150px)', 'left':'calc(50% - 150px)', 'background-color':'#e0e0e0',
+              'border-radius':'10px','height':'450px', 'padding':'10px'
             });
 
         })
@@ -178,6 +206,11 @@
     </script>
 
     <style>
+
+        .home{
+            margin-right: 50%;
+        }
+
         .close{
             opacity: 100%;
             background-color:#000000				;

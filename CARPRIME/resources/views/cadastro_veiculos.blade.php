@@ -16,7 +16,7 @@
     <title>CarPrime</title> 
 </head>
 <body>
-    <nav class="sidebar close">
+ <nav class="sidebar close">
         <header>
             <div class="image-text">
                 <span class="image">
@@ -88,33 +88,69 @@
 
     <section class="home home2">
         <div class="container">
-            <div class="row">
-                <!-- Card 1-->
-            @foreach ($veiculos as $key=>$veiculo)
-                <div class="col">
-                    <div class="card" style="width: 15em; border-radius: 10px;margin-top: 5%;">
-                        <img src="{{$veiculo->url_veiculo}}" class="card-img-top" alt="Imagem Carro">
-                        <div class="card-body">
-                          <h5 class="card-title">{{$veiculo->nm_veiculo}}</h5>
-                          <p class="card-text">
-                            {{$veiculo->ds_veiculo}}
-                          </p><p class="card-text">
-                            {{$veiculo->transmissao}}
-                          </p>
-                          </p><p class="card-text">
-                            {{$veiculo->km_rodados.'KM'}}
-                          </p>
-                          <a href="#" class="btn btn-primary">Acessar</a>
-                        </div>
-                      </div>
-                      <br/>
-                </div>  
-            @endforeach
-    </section>
-    
-   <script src="{{ asset('js/script.js')}}"></script>
+            <h1>Cadastro de Veículos</h1>
+            <form>
+                <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome">
+                </div>
+                <div class="mb-3">
+                <label for="descricao" class="form-label">Descrição</label>
+                <textarea class="form-control" id="descricao" name="descricao"></textarea>
+                </div>
+                <div class="mb-3">
+                <label for="combustivel" class="form-label">Combustível</label>
+                <select class="form-select" id="combustivel" name="combustivel">
+                    <option value="">Selecione</option>
+                    <option value="gasolina">Gasolina</option>
+                    <option value="alcool">Álcool</option>
+                    <option value="diesel">Diesel</option>
+                    <option value="flex">Flex</option>
+                </select>
+                </div>
+                <div class="mb-3">
+                <label for="portas" class="form-label">Número de Portas</label>
+                <input type="number" class="form-control" id="portas" name="portas" min="1">
+                </div>
+                <div class="mb-3">
+                <label for="km" class="form-label">Km Rodados</label>
+                <input type="number" class="form-control" id="km" name="km" min="0">
+                </div>
+                <div class="mb-3">
+                <label for="transmissao" class="form-label">Transmissão</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="transmissao" id="manual" value="manual">
+                    <label class="form-check-label" for="manual">
+                    Manual
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="transmissao" id="automatico" value="automatico">
+                    <label class="form-check-label" for="automatico">
+                    Automático
+                    </label>
+                </div>
+                </div>
+                <div class="mb-3">
+                <label for="valor" class="form-label">Valor do Veículo</label>
+                <input type="text" class="form-control" id="valor" name="valor">
+                </div>
+                <div class="mb-3">
+                <label for="url" class="form-label">URL da Imagem</label>
+                <input type="text" class="form-control" id="url" name="url">
+                </div>
+                <div class="mb-3">
+                <label for="marca" class="form-label">Marca</label>
+                <input type="text" class="form-control" id="marca" name="marca">
+                </div>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </form>
+        </div>
 
-   <style>
+    </section>
+    <script src="{{ asset('js/script.js')}}"></script>
+</body>
+<style>
         .close{
             opacity: 100%;
             background-color:#000000				;
@@ -131,7 +167,10 @@
         .close:not(:disabled):not(.disabled):hover, .close:not(:disabled):not(.disabled):focus {
             opacity: 100%;
         }
-    </style>
 
-</body>
+        .container{
+            width: 50%;
+            background-color: #fff;
+        }
+    </style>
 </html>

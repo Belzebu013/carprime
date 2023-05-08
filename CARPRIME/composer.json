@@ -27,7 +27,8 @@
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
             "App\\Http\\Controllers\\": "app/Http/Controllers/",
-            "App\\Models\\": "app/Models/"
+            "App\\Models\\": "app/Models/",
+            "PhpOffice\\PhpSpreadsheet\\": "PhpOffice/PhpSpreadsheet/"
         }
     },
     "autoload-dev": {

@@ -124,7 +124,6 @@ class indexController extends Controller
             ->orderBy('mes_venda', 'asc')
             ->get();
 
-        dd($mes);
         return view('index', [
             'venda_mes'=>$venda_mes,
             'venda_ano'=>$venda_ano,
@@ -139,7 +138,8 @@ class indexController extends Controller
     }
 
     public function BaixarRelatorio(Request $request){
-        $mes = $request->mes;
+
+        $mes = (int)$request->input('valor');
 
         $venda_mes = (float)Index::whereBetween('dt_venda',['2022-'.$mes.'-01','2022-'.$mes.'-30'])
             ->sum('vl_venda');
@@ -177,6 +177,10 @@ class indexController extends Controller
             'competencia'=>$competencia,
             'mes'=>$mes
         ]);
+    }
+
+    public function CadastroVeiculo(){
+        return view('cadastro_veiculos');
     }
 }
 

@@ -9,6 +9,13 @@ use App\Models\Clientes;
 class clientesController extends Controller
 {
     public function listar(){
+
+        $id_cad = Session::get('login');
+
+        if(empty($id_cad)){
+            return redirect()->route('login');
+        }
+        
         $clientes = Clientes::all();
         
         return view('clientes', ['clientes'=>$clientes]);
@@ -28,6 +35,14 @@ class clientesController extends Controller
 
         return 'Cadastro realizado com sucesso!';
 
+    }
+
+    public function Excluir(Request $request){
+        $id = (int)$request->input('id_cliente');
+        $cliente = Clientes::where('id_cliente', $id)->delete();
+        $msg = "REGISTRO EXCLUIDO COM SUCESSO!";
+        $clientes = Clientes::all();
+        return view('clientes', ['msg'=>$msg, 'clientes'=>$clientes]);
     }
 
 }
